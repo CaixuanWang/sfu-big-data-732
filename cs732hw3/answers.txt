@@ -1,0 +1,19 @@
+1.
+The wordcount-5 data set is not equally set into 8 parts. It's very unbalanced. There are two parts that are very large (in MB) and the others are small (in KB).
+Thus, without repartitions, some of the parts are finished very quick (in seconds). Some of the large files are finished after minutes. This is why it runs very slowly at first.
+
+Thus, we use the .repartition() function to fix this problem. It uses a shuffle to redistribute data to new rdd with certain partitions. Thus, we run similar sized data and it becomes balanced. Then, it runs faster. I think numbers are times of the executors will be nice.
+
+2.
+The wordcount-5 is very balanced and it has very equally sized files. Since all files are similar in size and they are not too large or too small. Thus, it's not necessary for us to do the repartition. The default partition is enough.
+Since the repartition function ( .repartition() ) also costs time because it's a shuffle, if we use it, it will be slightly slower.
+
+3.
+I think there are two ways to male the wordcount code process it and get results faster.
+One is to use the proper repartitions in the code.
+The other one is the answer because it modify the wordcount-5 input. We can modify the input folder and divide it to make this be more equally size parts and make the input more balanced.
+By this, we can avoid the situation I mentioned in Q1 (too large parts slow the process).
+
+4.
+The number of partitions range can be wide to keep the running time small. I tried lots of numbers from one to 10000. 1 and 2 are very slow numbers and so does 10000.
+The range of 4 to 1000 are good that the time is around 16 seconds.

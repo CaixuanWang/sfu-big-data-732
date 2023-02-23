@@ -1,0 +1,37 @@
+1.
+With the .cache(), the time we used is less. This is because that the dataset we are using is not a large one and we have two output files which are positive and negative. That means that we will need data more than once.
+
+And with cache, we are able to store input RDD in memory and easily access it when needed instead of generating it every time and waste time.
+
+Also, since the data size is not large, cache doesn't cost too much for the memory.
+
+For time data I got from cluster, the time without cache is around 10 seconds more than the time with cache in reddit-4 dataset in average.
+The time without cache is around 7 seconds more than the time with cache in reddit-3 dataset in average.
+
+2.
+If the dataset is really large and we don't need cache for many times, the cache() can make code slower.
+
+This is because cache needs time for itself especially for a large dataset (takes longer time). Since it can't fit into RAM, pyspark will let it store in the disk which is much slower than the normal save in memory. If we don't need to use cache for too many times, then it's not worth to spend that much long time to cache.
+
+The time cache itself costs is more than the time we saved by only calling cache twice (in this code). Therefore, reading from dataset directly is better in this case.
+
+
+3.
+If the broadcast object is small and the dataset is large, then broadcast will be faster than a actual join because we don't need to read the same RDD a lot and that saves time.
+
+Using our code as example, an actual join needs to copy and send the small RDD (the pairmean in my code) over and over, and it needs to shuffle into the partition of same key and join, so the whole join needs lots of time.
+
+When we use broadcast instead of actual join, the larger dataset is, the more time we can save. This is because broadcast can do the send and copy and broadcast and calculate in partition and use key to sort the result in the end and it saves more time when data size is larger.
+
+The broadcast object itself doesn't cost too much time at this time, too.
+
+4.
+If the broadcast object is large and dataset is small, broadcast join will be slower.
+
+First, broadcast will cost time for itself. The actual join will be more direct and simple.
+
+Second, if the dataset is small, the time broadcast saved from it will be small.
+
+Third, the broadcast have a limit size (8 GB), too. There could be chance that it can't finish its work and actual join won't have that worry.
+
+For question 3 and 4, under the condition that broadcast won't be larger than its limit, we are just comparing the broadcast object's cost time itself and the time actual join used to copy and send data into partition.

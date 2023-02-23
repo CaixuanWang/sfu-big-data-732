@@ -1,0 +1,19 @@
+1.
+In the class, I will add a title longwritable. In the loop, I will set its value and return with filetime such as 20160801-00000 and a pair that contains the title and count.
+
+2.
+flatMap is applying the function to every row of data and then flatten it.
+map is only applying the function and it does not flatten the stream.
+
+I think flatMap is more like mapReduce because that it can map 1 input to n output and it's just like mapReduce.
+
+3.
+The reduce only reduces one final value.
+The reduceByKey has value for each key and can remain RDD and have further transformation done.
+
+I think the reduceByKey is more like the MapReduce concept of reducing. Because 
+
+4.
+I use the max to find the highest number of page views and I can update this function with a if to save data when there is a tie.
+Then I will use list to contain all pages of highest number.
+The update of max function and list of all pages of highest number will be necessary. The return should be the filetime such as 20160801-00000 and list of all acceptable pages and count.
