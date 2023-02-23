@@ -1,0 +1,26 @@
+Question 1
+The original row will be updated and rewritten.
+
+Question 2
+We won't get answer when we query a keyspace with replication factor 1 and one node down. This is because that some data is stored in unhealthy node and when node is down they can't be accessed. In our case, we got "NoHostAvailable" error.
+
+All query will work successfully with replication factor 2 and a node down since data can be stored to two nodes and even one node is down, we can still access one node. 
+
+Question 3
+When consistency level = one and replication factor = 1, node up then succeed, node down then fail.
+When consistency level = one and replication factor >= 2, we only need one node up to succeed. Thus, we can read and write successfully anytime.
+When consistency level = all and replication factor = 1, node up then succeed, node down then fail.
+When consistency level = all and replication factor >= 2, when partition into all healthy node, then succeed. If partition into both healthy and unhealthy nodes, one node down, then it will fail.
+
+Question 4
+the WHERE id=2/3/4/5/9 values returned successfully with CONSISTENCY ALL when one of the nodes was down.
+This is because when replication factor =2, we need 2 nodes to store data. These successful id doesn't use the down node, so they didn't fail.
+
+Question 5
+CREATE TABLE nasalogs (host TEXT, datetime TIMESTAMP, path TEXT, bytes INT, id uuid, PRIMARY KEY(host, id));
+Cassandra doesn't like calculation and it's expensive. We need to use partition when we do GroupBy, so host should be used as primary key.
+Since host is not unique, we need a unique key which is uuid to make the whole primary key unique.
+
+Question 6
+
+SELECT SUM(bytes) FROM nasalogs;

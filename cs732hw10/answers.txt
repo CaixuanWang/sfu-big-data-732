@@ -1,0 +1,63 @@
+Question 1
+My best guess for the slope and intercept of the streaming points being produced is 2.767 and -20.
+
+Question 2
+Yes, my streaming program's estimate of the slope and intercept is getting better as the program runs.
+This is because that the program aggregating all of the data from the start of time.
+
+Question 3
+Validation score for RGB model: 0.601313
+Validation score for LAB model: 0.695652
+
+Question 4
+Based on the train and test result on t-max1 and t-max2 data, 
+there's overfiting in t-max1.
+there's no overfiting in t-max2.
+
+T-max1 train
+r2 = 0.9466791810127874
+rmse = 2.8820090715062303
+
+T-max1 validation
+r2 = 0.803341794763174
+rmse = 4.87445383315284
+
+T-max1 test
+r2 = 0.8620449688053007
+rmse = 4.801988664701414
+(5,[0,1,2,3,4],[0.039556001612208104,0.026347650825084168,0.03128222856911277,0.07467284177267175,0.8281412772209232])
+
+T-max2 train
+r2 = 0.912212186245757
+rmse = 3.8086479735653045
+
+T-max2 validation
+r2 = 0.9100667977466442
+rmse = 3.855778368163456
+
+T-max2 test
+r2 = 0.9095925031155591
+rmse = 3.88735838573624
+(5,[0,1,2,3,4],[0.02674277555599127,0.014665463544883106,0.007779883704543171,0.03565052591200586,0.9151613512825767])
+
+Question 5
+Here I use T-max2 dataset:
+
+with “yesterday's temperature” test
+r2 = 0.9095925031155591
+rmse = 3.88735838573624
+(5,[0,1,2,3,4],[0.02674277555599127,0.014665463544883106,0.007779883704543171,0.03565052591200586,0.9151613512825767])
+
+without “yesterday's temperature” test
+r2 = 0.776483289413802
+rmse = 6.11233793762699
+(4,[0,1,2,3],[0.36564947602871184,0.1234456279654149,0.10935586496796608,0.4015490310379071])
+
+Question 6
+(a)
+I think this make sense because the latitude and day of year is 0.36 and 0.40, which is a lot. Also, these two factors are most important for temperature.
+
+(b)
+It's not just predicting “same as yesterday”, since it has about 0.91 but not 1. Thus it's similar but not exactly the same.
+
+
